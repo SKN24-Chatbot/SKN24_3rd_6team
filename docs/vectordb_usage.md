@@ -59,15 +59,11 @@ for r in results:
 ```python
 from src.vectordb import Embedder
 
-# Embedder() 는 팩토리 함수입니다. EMBEDDING_MODEL 환경변수를 읽어 적절한 임베더 반환
+# Embedder() 는 팩토리 함수입니다. EMBEDDING_MODEL 환경변수를 읽어 OpenAI 혹은 HuggingFace모델 중 적절한 것을 실행합니다.
 embedder = Embedder()
 ```
 
-**환경변수에 따른 동작:**
-- `EMBEDDING_MODEL=paraphrase-multilingual-MiniLM-L12-v2` → `HFEmbedder` (로컬 실행, 느림)
-- `EMBEDDING_MODEL=text-embedding-3-small` → `OpenAIEmbedder` (API 호출, 빠름)
-
-> 처음 실행할 때 HFEmbedder는 모델을 다운로드합니다 (수백 MB). 시간이 걸릴 수 있어요.  
+> 처음 실행할 때 HFEmbedder는 모델을 다운로드합니다 (수백 MB). 시간이 걸릴 수 있습니다.  
 > 두 번째 실행부터는 HuggingFace 캐시를 써서 빠릅니다.  
 > OpenAIEmbedder는 API 호출만 하므로 즉시 실행됩니다 (단, `OPENAI_API_KEY` 필요).
 
